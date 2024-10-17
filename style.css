@@ -1,0 +1,456 @@
+/* Importação da fonte 'Press Start 2P' do Google Fonts para um estilo retro de arcade */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Definição de variáveis CSS para cores e estilos principais, facilitando a manutenção e alterações */
+:root {
+    --primary-color: #00ff00;
+    --secondary-color: #ff00ff;
+    --background-color: rgba(0, 0, 0, 0.7);
+    --text-color: #ffffff;
+    --button-color: #ff0000;
+    --arcade-body: rgba(56, 56, 56, 0.9);
+}
+
+/* Estilos gerais para o corpo da página, centralizando o conteúdo */
+body {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Alterado de height para min-height */
+    margin: 0;
+    padding: 0;
+    /* Removido o padding-bottom */
+    overflow: hidden;
+    position: relative;
+    background-color: #000;
+    /* Adicionado um fundo preto para cobrir toda a tela */
+}
+
+/* Estilos para o vídeo de fundo, cobrindo toda a tela */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+}
+
+/* Estilos para a máquina de arcade, definindo seu tamanho e aparência */
+.arcade-machine {
+    max-width: 90%;
+    width: 500px;
+    background-color: var(--arcade-body);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    /* Alterado para posicionamento absoluto */
+    top: 50%;
+    /* Posiciona no meio vertical */
+    left: 50%;
+    /* Posiciona no meio horizontal */
+    transform: translate(-50%, -50%);
+    /* Centraliza perfeitamente */
+    z-index: 1;
+}
+
+/* Estilos para a tela do jogo dentro da máquina de arcade */
+.screen {
+    background-color: var(--background-color);
+    border: 10px solid #111;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Efeito de scanline na tela para um visual mais autêntico de arcade */
+.screen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Estilos para a área do jogo dentro da tela */
+#game {
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Estilos para o título do jogo */
+.game-title {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 0 var(--secondary-color);
+}
+
+/* Estilos comuns para inputs, selects e botões */
+input,
+select,
+button {
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--background-color);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+/* Estilos específicos para botões */
+button {
+    background-color: var(--button-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Estilos para a área de escolhas (pedra, papel, tesoura) */
+.choices {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Estilos para os botões de escolha */
+.choice {
+    width: 30%;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para os ícones de escolha */
+.choice-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    filter: brightness(0) invert(1);
+}
+
+/* Efeitos de hover para os botões de escolha */
+.choice:hover {
+    background-color: var(--primary-color);
+    color: var(--button-color);
+}
+
+.choice:hover .choice-icon {
+    filter: none;
+}
+
+/* Estilos para as áreas de resultado e pontuação */
+#result,
+#score {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Efeito de piscar para o resultado */
+.blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Estilos para a área de controles (joystick e botões) */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Estilos para o container do joystick */
+.joystick-container {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(145deg, #2e2e2e, #383838);
+    border-radius: 50%;
+    position: relative;
+    overflow: visible;
+    box-shadow: 20px 20px 60px #1a1a1a, -20px -20px 60px #464646;
+}
+
+/* Estilos para o joystick */
+.joystick {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(145deg, #4d4d4d, #5a5a5a);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+    cursor: grab;
+    box-shadow: inset 5px 5px 10px #3a3a3a, inset -5px -5px 10px #6d6d6d, 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.joystick:active {
+    cursor: grabbing;
+    box-shadow: inset 3px 3px 5px #3a3a3a, inset -3px -3px 5px #6d6d6d, 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para o botão do joystick */
+.joystick-knob {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(145deg, #ff0000, #cc0000);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), inset 2px 2px 3px rgba(255, 255, 255, 0.3), inset -2px -2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para os botões de arcade */
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.arcade-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeitos de brilho e profundidade para os botões de arcade */
+.arcade-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+    border-radius: 50%;
+}
+
+.arcade-button::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+    background: inherit;
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.arcade-button:active {
+    transform: translateY(4px);
+}
+
+.arcade-button:active::after {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos específicos para o botão vermelho */
+.arcade-button.red {
+    background: linear-gradient(145deg, #ff0000, #cc0000);
+    box-shadow: 0 6px 0 #8b0000, 0 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+.arcade-button.red:active {
+    box-shadow: 0 2px 0 #8b0000, 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos específicos para o botão azul */
+.arcade-button.blue {
+    background: linear-gradient(145deg, #0000ff, #0000cc);
+    box-shadow: 0 6px 0 #00008b, 0 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+.arcade-button.blue:active {
+    box-shadow: 0 2px 0 #00008b, 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para o footer */
+.arcade-footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 2px solid var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: -100px;
+    /* Esconde o footer inicialmente */
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: bottom 0.3s ease;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-text {
+    color: var(--text-color);
+    font-size: 10px;
+    margin: 0 0 5px 0;
+}
+
+.social-links {
+    margin: 5px 0;
+}
+
+.social-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 10px;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--secondary-color);
+}
+
+.footer-credits {
+    color: var(--text-color);
+    font-size: 8px;
+    margin: 0;
+}
+
+/* Área sensível ao mouse para ativar o footer */
+.footer-trigger {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    /* Altura da área sensível */
+}
+
+/* Estilo quando o footer está visível */
+.arcade-footer.visible {
+    bottom: 0;
+}
+
+/* Animação de piscar para os links sociais */
+@keyframes blink-text {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.social-link:hover {
+    animation: blink-text 1s infinite;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 600px) {
+
+    /* Ajustes para telas menores */
+    .arcade-machine {
+        padding: 10px;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    input,
+    select,
+    button {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .game-title {
+        font-size: 18px;
+    }
+
+    .choice {
+        font-size: 10px;
+    }
+
+    .choice-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .joystick-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .joystick {
+        width: 50px;
+        height: 50px;
+    }
+
+    .arcade-button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .arcade-footer {
+        padding: 5px;
+    }
+
+    .footer-text,
+    .social-link {
+        font-size: 8px;
+    }
+
+    .footer-credits {
+        font-size: 6px;
+    }
+}

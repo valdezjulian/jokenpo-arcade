@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Define a codificação de caracteres do documento como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Configura a viewport para dispositivos móveis, garantindo uma experiência responsiva -->
+    <link rel="shortcut icon" href="assets/favicon-icon.png" type="image/x-icon">
+    <!-- Define o ícone da página que aparece na aba do navegador -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Vincula o arquivo CSS externo para estilização da página -->
+    <title>Jokenpô Arcade</title>
+    <!-- Define o título da página que aparece na aba do navegador -->
+</head>
+
+<body>
+    <!-- Vídeo de fundo em loop para criar uma atmosfera visual dinâmica -->
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="assets/background.mp4" type="video/mp4">
+    </video>
+
+    <!-- Estrutura principal do jogo em formato de máquina de arcade -->
+    <div class="arcade-machine">
+        <!-- Tela do jogo, simula a tela de um arcade real -->
+        <div class="screen">
+            <div id="game">
+                <!-- Título do jogo -->
+                <h1 id="jokenpo-arcade" class="game-title">JOKENPO ARCADE</h1>
+
+                <!-- Seção de configuração inicial do jogo -->
+                <div id="setup">
+                    <input type="text" id="playerName" placeholder="SEU NOME">
+                    <!-- Campo para o jogador inserir seu nome -->
+                    <select id="difficulty">
+                        <!-- Seletor de dificuldade do jogo -->
+                        <option value="easy">FÁCIL</option>
+                        <option value="medium">MÉDIO</option>
+                        <option value="hard">DIFÍCIL</option>
+                    </select>
+                    <button id="startGame">INICIAR JOGO</button>
+                    <!-- Botão para iniciar o jogo após configuração -->
+                </div>
+
+                <!-- Área de gameplay (inicialmente oculta) -->
+                <div id="gameplay" style="display: none;">
+                    <h2>ESCOLHA SUA JOGADA</h2>
+                    <!-- Opções de jogada para o jogador -->
+                    <div class="choices">
+                        <button class="choice" data-choice="rock">
+                            <img src="assets/pedra.png" alt="Pedra" class="choice-icon">
+                            PEDRA
+                        </button>
+                        <button class="choice" data-choice="paper">
+                            <img src="assets/papel.png" alt="Papel" class="choice-icon">
+                            PAPEL
+                        </button>
+                        <button class="choice" data-choice="scissors">
+                            <img src="assets/tesoura.png" alt="Tesoura" class="choice-icon">
+                            TESOURA
+                        </button>
+                    </div>
+                    <!-- Área para exibir o resultado da rodada -->
+                    <div id="result" class="blink"></div>
+                    <!-- Área para exibir o placar atual -->
+                    <div id="score"></div>
+                    <!-- Botão para voltar à tela inicial -->
+                    <button id="backButton">VOLTAR</button>
+                </div>
+            </div>
+        </div>
+        <!-- Controles decorativos da máquina de arcade para maior imersão -->
+        <div class="controls">
+            <!-- Container do joystick decorativo -->
+            <div class="joystick-container">
+                <div id="joystick" class="joystick">
+                    <div class="joystick-knob"></div>
+                </div>
+            </div>
+            <!-- Botões decorativos do arcade -->
+            <div class="buttons">
+                <button class="arcade-button red"></button>
+                <button class="arcade-button blue"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer com informações do projeto e links sociais -->
+    <footer id="arcade-footer" class="arcade-footer">
+        <div class="footer-content">
+            <p class="footer-text">© 2024 JOKENPO ARCADE | DESENVOLVIDO POR JULIAN VALDEZ</p>
+            <div class="social-links">
+                <a href="https://github.com/valdezjulian" class="social-link">GITHUB</a>
+                <a href="https://www.linkedin.com/in/valdezjulian/" class="social-link">LINKEDIN</a>
+                <a href="https://www.instagram.com/valdezjulian.dev/" class="social-link">INSTAGRAM</a>
+            </div>
+            <p class="footer-credits"></p>
+        </div>
+    </footer>
+
+    <!-- Vincula o arquivo JavaScript externo para a lógica do jogo -->
+    <script src="script.js"></script>
+</body>
+
+</html>
